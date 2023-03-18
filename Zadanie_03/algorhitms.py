@@ -32,9 +32,21 @@ cv.createTrackbar('Up', 'Camera', 0, 255, upper_clb)
 
 while True:
     _, img = cam.read()
+    img_orig = img.copy()
     img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     img = threshold(img, low_limit=lower, upper_limit=upper)
+
+    # Blur
+    blur = np.array([[1, 2, 1], [2, 4, 2], [1, 2, 1]])
+    blur = blur * 1/32
+    img = cv.filter2D(img, -1, blur)
+
+    # Edge detection
+    kernel = np.array([[0, -1, 0], [-1, 4, -1], [0, -1, 0]])
+    img = cv.filter2D(img, -1, kernel)
+
     cv.imshow('Camera', img)
+
     pressed = cv.waitKey(1)
     if pressed == ord('q'):
         break
