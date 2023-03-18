@@ -1,0 +1,10 @@
+# Pycharm
+.idea
+
+# Images
+*.jpg
+*.png
+*.bmp
+
+# Enviroment
+venv/
