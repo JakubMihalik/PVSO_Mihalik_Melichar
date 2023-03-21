@@ -18,8 +18,8 @@ def threshold_2_callback(val):
 
 cam = cv.VideoCapture(0)
 window = cv.namedWindow('Camera')
-cv.createTrackbar('Lower limit', 'Camera', 1, 500, threshold_1_callback)
-cv.createTrackbar('Upper limit', 'Camera', 1, 500, threshold_2_callback)
+cv.createTrackbar('Lower limit', 'Camera', 1, 255, threshold_1_callback)
+cv.createTrackbar('Upper limit', 'Camera', 1, 255, threshold_2_callback)
 
 while True:
     # Read image from camera
@@ -32,7 +32,7 @@ while True:
     _, img = cv.threshold(img, threshold1, threshold2, cv.THRESH_BINARY)
     contours, hierarchy = cv.findContours(image=img, mode=cv.RETR_TREE, method=cv.CHAIN_APPROX_NONE)
     img_copy = img_orig.copy()
-    cv2.drawContours(image=img_copy, contours=contours, contourIdx=-1, color=(0, 255, 0), thickness=2, lineType=cv.LINE_AA)
+    img = cv2.drawContours(image=img_copy, contours=contours, contourIdx=-1, color=(0, 255, 0), thickness=2, lineType=cv.LINE_AA)
 
     # Show image
     cv.imshow('Camera', img)
@@ -42,6 +42,6 @@ while True:
     if pressed_key == ord('q'):
         break
     if pressed_key == ord('s'):
-        cv.imwrite('Images/img_contours.jpg', img_copy)
+        cv.imwrite('img_contours.jpg', img)
 
 cv.destroyAllWindows()

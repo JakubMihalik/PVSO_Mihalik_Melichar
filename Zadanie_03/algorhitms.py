@@ -58,6 +58,6 @@ while True:
     if pressed == ord('q'):
         break
     if pressed == ord('s'):
-        cv.imwrite('contours.jpg', img)
+        cv.imwrite('contours-green.jpg', res)
 
 cv.destroyAllWindows()
