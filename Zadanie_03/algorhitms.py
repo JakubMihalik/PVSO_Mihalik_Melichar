@@ -48,17 +48,16 @@ while True:
     img = cv.filter2D(img, -1, kernel)
 
     # Mask
-    mask = np.zeros(img_orig.shape, dtype=np.uint8)
-    res = cv.bitwise_and(img_orig, mask)
+    mask = np.zeros_like(img_orig)
+    mask[img != 0] = (0, 255, 0)
+    res = cv.addWeighted(img_orig, 1, mask, 1, 0)
 
-    cv.imshow('Camera', img)
+    cv.imshow('Camera', res)
 
     pressed = cv.waitKey(1)
     if pressed == ord('q'):
         break
     if pressed == ord('s'):
         cv.imwrite('contours.jpg', img)
-
-print(img_orig.shape)
 
 cv.destroyAllWindows()
