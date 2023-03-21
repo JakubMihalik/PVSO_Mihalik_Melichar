@@ -6,5 +6,9 @@
 *.png
 *.bmp
 
+# Videos
+*.mp4
+*.avi
+
 # Enviroment
 venv/

@@ -32,7 +32,7 @@ while True:
     _, img = cv.threshold(img, threshold1, threshold2, cv.THRESH_BINARY)
     contours, hierarchy = cv.findContours(image=img, mode=cv.RETR_TREE, method=cv.CHAIN_APPROX_NONE)
     img_copy = img_orig.copy()
-    img = cv2.drawContours(image=img_copy, contours=contours, contourIdx=-1, color=(0, 255, 0), thickness=2, lineType=cv.LINE_AA)
+    img_cont = cv2.drawContours(image=img_copy, contours=contours, contourIdx=-1, color=(0, 255, 0), thickness=2, lineType=cv.LINE_AA)
 
     # Show image
     cv.imshow('Camera', img)
