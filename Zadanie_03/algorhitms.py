@@ -25,15 +25,6 @@ def threshold(image, low_limit, upper_limit):
     return image
 
 
-# Main code
-# cam = cv.VideoCapture(0)
-cam, xi_img = camera.setup_camera()
-
-cv.namedWindow('Camera')
-cv.createTrackbar('Low', 'Camera', lower, 255, lower_clb)
-cv.createTrackbar('Up', 'Camera', upper, 255, upper_clb)
-
-
 def image_convolution(image, kernel):
     kernel_height, kernel_width = kernel.shape
     image_height, image_width = image.shape
@@ -47,17 +38,24 @@ def image_convolution(image, kernel):
     return output_image
 
 
-# Blur
-blur = np.array([[1, 2, 1], [2, 4, 2], [1, 2, 1]])
-blur = blur * 1 / 32
-# Edge detection
-kernel = np.array([[0, -1, 0], [-1, 4, -1], [0, -1, 0]])
-
-
 def draw_contours(image, threshold_image):
     image[threshold_image != 0] = (0, 255, 0, 255)
     return image
 
+
+# Main code
+# cam = cv.VideoCapture(0)
+cam, xi_img = camera.setup_camera()
+
+cv.namedWindow('Camera')
+cv.createTrackbar('Low', 'Camera', lower, 255, lower_clb)
+cv.createTrackbar('Up', 'Camera', upper, 255, upper_clb)
+
+# Blur
+blur = np.array([[1, 2, 1], [2, 4, 2], [1, 2, 1]])
+blur = blur * 1 / 16
+# Edge detection
+kernel = np.array([[0, -1, 0], [-1, 4, -1], [0, -1, 0]])
 
 while True:
     # _, img = cam.read()
